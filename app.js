@@ -14,6 +14,9 @@ app.use(express.json())
 app.use(morgan("dev"))
 
 //routes
+
+app.use("/api/v1/student", require("./Routes/studentRoute"));
+
 app.get('/test', (req, res) => {
     res.status(200).send('<h1>Welcome Crud Application on Live</h1>')
 })
