@@ -1,5 +1,5 @@
 const express = require('express')
-const { getStudents, getStudentsByID } = require('../Controllers/StudentsController')
+const { getStudents, getStudentsByID, createStudent, updateStudent } = require('../Controllers/StudentsController')
 
 const router = express.Router()
 
@@ -7,7 +7,12 @@ const router = express.Router()
 // get all student list --GET
 
 router.get('/list', getStudents)
+// get student by id
 router.get('/get/:id',getStudentsByID)
+// Create new student
+router.post('/create', createStudent)
+// Update new student
+router.put('/update/:id', updateStudent)
 
 
 module.exports = router
