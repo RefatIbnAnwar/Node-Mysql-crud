@@ -93,7 +93,7 @@ const createStudent = async (req, res) => {
         console.log(error)
         res.status(500).send({
             success: false,
-            message: "Error in get student by id API",
+            message: "Error in create API",
             error
         })
     }
@@ -128,12 +128,35 @@ const updateStudent = async (req, res) => {
         console.log(error)
         res.status(500).send({
             success: false,
-            message: "Error in get student by id API",
+            message: "Error in update student by id API",
             error
         })
     }
 }
 
+const deleteStudent = async (req, res) => {
+    try {
+        const studentId = req.params.id;
+        if (!studentId) {
+            return res.status(404).send({
+                success: false,
+                message: "Invalid or provide student ID"
+            })
+        }
+        await mysqlPool.query('DELETE FROM STUDENTS WHERE ID=?',[studentId])
+        res.status(200).send({
+            success: true,
+            message: "Delete completed"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "Error in delete student by id API",
+            error
+        })
+    }
 
+}
 
-module.exports = { getStudents, getStudentsByID, createStudent, updateStudent }
+module.exports = { getStudents, getStudentsByID, createStudent, updateStudent, deleteStudent }
